@@ -1,8 +1,12 @@
-export default function TaskButton({ onClick }) {
+export default function TaskButton({ onClick, isOpenQuicks }) {
+  const openQuicks = isOpenQuicks
+    ? `opacity-100 translate-x-[0px] rotate-0`
+    : `opacity-0 translate-x-[190px] rotate-45`;
+
   return (
     <div
       onClick={onClick}
-      className="flex-col mb-[4px] absolute right-[214px] bottom-[27px] cursor-pointer"
+      className={`flex-col mb-[4px] absolute right-[214px] bottom-[27px] cursor-pointer ${openQuicks} transition duration-300`}
     >
       <span className="flex justify-center font-bold text-[16px] text-white mb-[8.87px]">
         Task
