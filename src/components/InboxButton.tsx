@@ -1,4 +1,9 @@
-export default function InboxButton({ onClick, isOpenQuicks, isOpenInbox }) {
+export default function InboxButton({
+  onClick,
+  isOpenQuicks,
+  isOpenInbox,
+  isOpenTask,
+}) {
   const openQuicks = isOpenQuicks
     ? `opacity-100 translate-x-[0px] rotate-0`
     : `opacity-0 translate-x-[100px] rotate-45`;
@@ -19,7 +24,7 @@ export default function InboxButton({ onClick, isOpenQuicks, isOpenInbox }) {
       <span
         className={`flex justify-center font-bold text-[16px] text-white mb-[8.87px] ${
           isOpenInbox ? "hidden" : ""
-        } `}
+        }`}
       >
         Inbox
       </span>

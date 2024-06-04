@@ -1,9 +1,10 @@
 "use client";
 
-export default function DefaultButton({ onClick, isOpenInbox }) {
-  const openInbox = isOpenInbox
-    ? `opacity-100 -translate-x-[10px] rotate-45 ease-in-out bg-[#4F4F4F]`
-    : `opacity-100 rotate-0 ease-in-out bg-[#2F80ED]`;
+export default function DefaultButton({ onClick, isOpenInbox, isOpenTask }) {
+  const openInbox =
+    isOpenInbox || isOpenTask
+      ? `opacity-100 -translate-x-[15px] rotate-45 ease-in-out bg-[#4F4F4F]`
+      : `opacity-100 rotate-0 ease-in-out bg-[#2F80ED]`;
 
   return (
     <div
@@ -11,7 +12,11 @@ export default function DefaultButton({ onClick, isOpenInbox }) {
       className={`rounded-full w-[68px] h-[68px] flex items-center justify-center absolute right-[34px] bottom-[27px] cursor-pointer ${openInbox} transition duration-300`}
       style={{ boxShadow: "0px 4px 4px 0px #0000001A" }}
     >
-      <div className="w-[56px] h-[56px] flex items-center justify-center">
+      <div
+        className={`w-[56px] h-[56px] flex items-center justify-center ${
+          isOpenInbox || isOpenTask ? "hidden" : ""
+        }`}
+      >
         <svg
           width="18"
           height="32"
