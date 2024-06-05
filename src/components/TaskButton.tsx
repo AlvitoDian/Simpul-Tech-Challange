@@ -17,7 +17,7 @@ export default function TaskButton({
   return (
     <div
       onClick={onClick}
-      className={`flex-col mb-[4px] absolute right-[214px] bottom-[27px] cursor-pointer ${openQuicks} ${openInbox}  ${
+      className={`flex-col absolute right-[214px] bottom-[27px] cursor-pointer ${openQuicks} ${openInbox}  ${
         isOpenTask
           ? "mb-[0px] translate-x-[180px] z-[10]"
           : "mb-[4px] translate-x-[0px]"
