@@ -1,7 +1,20 @@
-export default function ChatSection() {
+import LoadingChats from "./LoadingChats";
+import { useState, useEffect } from "react";
+
+export default function ChatContact() {
+  const [showContent, setShowContent] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <div className="absolute w-[734px] h-[737px] bg-[#FFFFFF] right-[34px] bottom-[110px] border-[1px] border-[#828282] rounded-[5px]">
-      <div className="flex justify-center mt-[20px] ">
+    <>
+      {/* Searchbar */}
+      <div className="flex justify-center mt-[20px]">
         <div className="relative">
           <input
             type="text"
@@ -25,6 +38,19 @@ export default function ChatSection() {
           </div>
         </div>
       </div>
-    </div>
+      {/* Searchbar End*/}
+
+      {/* Content */}
+      {showContent ? (
+        <LoadingChats />
+      ) : (
+        <div className="flex-col">
+          <div className="flex"> Akun 1</div>
+          <div className="flex"> Akun 1</div>
+          <div className="flex"> Akun 1</div>
+        </div>
+      )}
+      {/* Content End */}
+    </>
   );
 }

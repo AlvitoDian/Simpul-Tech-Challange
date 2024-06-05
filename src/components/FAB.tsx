@@ -4,7 +4,7 @@ import { useState } from "react";
 import DefaultButton from "./DefaultButton";
 import InboxButton from "./InboxButton";
 import TaskButton from "./TaskButton";
-import ChatSection from "./ChatSection";
+import ChatSection from "./ActiveBoxAction";
 
 export default function FAB() {
   const [isOpenQuicks, setIsOpenQuicks] = useState(false);
