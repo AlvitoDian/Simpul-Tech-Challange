@@ -4,13 +4,12 @@ import { useState } from "react";
 import DefaultButton from "./DefaultButton";
 import InboxButton from "./InboxButton";
 import TaskButton from "./TaskButton";
-import ChatSection from "./ActiveBoxAction";
+import ActiveBoxAction from "./ActiveBoxAction";
 
 export default function FAB() {
   const [isOpenQuicks, setIsOpenQuicks] = useState(false);
   const [isOpenInbox, setIsOpenInbox] = useState(false);
   const [isOpenTask, setIsOpenTask] = useState(false);
-  console.log(isOpenInbox);
 
   const handleOpenQuicks = () => {
     /*   if (isOpenInbox) {
@@ -49,7 +48,7 @@ export default function FAB() {
 
   return (
     <div>
-      <ChatSection />
+      <ActiveBoxAction isChat={isOpenInbox} isTask={isOpenTask} />
       <TaskButton
         onClick={handleTaskButtonClick}
         isOpenQuicks={isOpenQuicks}
