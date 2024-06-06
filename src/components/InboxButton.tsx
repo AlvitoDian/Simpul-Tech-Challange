@@ -23,7 +23,11 @@ export default function InboxButton({
     >
       <span
         className={`flex justify-center font-bold text-[16px] text-white mb-[8.87px] ${
-          isOpenInbox ? "hidden" : ""
+          (!isOpenQuicks && !isOpenInbox && !isOpenTask) ||
+          isOpenInbox ||
+          isOpenTask
+            ? "hidden"
+            : ""
         }`}
       >
         Inbox

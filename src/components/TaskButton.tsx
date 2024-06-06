@@ -25,7 +25,11 @@ export default function TaskButton({
     >
       <span
         className={`flex justify-center font-bold text-[16px] text-white mb-[8.87px] ${
-          isOpenTask ? "hidden" : ""
+          (!isOpenQuicks && !isOpenInbox && !isOpenTask) ||
+          isOpenInbox ||
+          isOpenTask
+            ? "hidden"
+            : ""
         }`}
       >
         Task

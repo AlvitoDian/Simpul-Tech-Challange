@@ -57,7 +57,7 @@ export default function Contact({ subject, name, message, date, isRead }) {
         </div>
       </div>
 
-      {isRead ? (
+      {!isRead ? (
         <div className="absolute right-0 bottom-[40px] w-[10px] h-[10px] bg-[#EB5757] rounded-full"></div>
       ) : (
         ""

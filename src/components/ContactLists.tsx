@@ -1,8 +1,9 @@
 import LoadingChats from "./LoadingChats";
 import { useState, useEffect } from "react";
 import Contact from "./Contact";
+import SupportContact from "./SupportContact";
 
-export default function ChatContact() {
+export default function ContactLists() {
   const [showContent, setShowContent] = useState(true);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function ChatContact() {
             name={"Cameron Philips :"}
             message={"Please check this out!"}
             date={"January, 1,2021 19:10"}
-            isRead={true}
+            isRead={false}
           />
           <Contact
             subject={
@@ -60,7 +61,7 @@ export default function ChatContact() {
             name={"Ellen :"}
             message={"Hey, please read."}
             date={"02/06/2021 10:45"}
-            isRead={false}
+            isRead={true}
           />
           <Contact
             subject={"8405-Diana SALAZAR MUNGUIA"}
@@ -69,7 +70,13 @@ export default function ChatContact() {
               "I understand your initial concerns and thats very valid, Elizabeth. But you bla bla bla bla bla bla"
             }
             date={"01/06/2021 12:19"}
-            isRead={false}
+            isRead={true}
+          />
+          <SupportContact
+            name={"FastVisa Support"}
+            message={"Hey there! Welcome to your inbox."}
+            date={"01/16/2021 12:19"}
+            isRead={true}
           />
         </div>
       )}

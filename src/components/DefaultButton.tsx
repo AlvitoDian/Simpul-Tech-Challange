@@ -3,8 +3,8 @@
 export default function DefaultButton({ onClick, isOpenInbox, isOpenTask }) {
   const openInbox =
     isOpenInbox || isOpenTask
-      ? `opacity-100 -translate-x-[15px] rotate-45 ease-in-out bg-[#4F4F4F]`
-      : `opacity-100 rotate-0 ease-in-out bg-[#2F80ED]`;
+      ? `opacity-100 -translate-x-[15px] ease-in-out bg-[#4F4F4F]`
+      : `opacity-100 ease-in-out bg-[#2F80ED]`;
 
   return (
     <div
