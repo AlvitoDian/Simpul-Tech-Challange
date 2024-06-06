@@ -96,7 +96,20 @@ export default function ChatSection() {
         </div>
       </div>
 
-      <div className="">INI TYPING</div>
+      <div className="flex px-[20px] gap-[13px]">
+        <div>
+          <input
+            type="text"
+            placeholder="Type a new message"
+            className="font-regular border-[1px] border-[#828282] rounded-[5px] w-[580px] h-[40px] 
+            placeholder-[#333333] pl-[16px] "
+          />
+        </div>
+
+        <button className="flex items-center justify-center bg-[#2F80ED] w-full rounded-[5px] font-bold text-white">
+          Send
+        </button>
+      </div>
     </div>
   );
 }

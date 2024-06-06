@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function BubbleChat({
   name,
   message,
@@ -5,11 +7,37 @@ export default function BubbleChat({
   isSender,
   userColor,
 }) {
+  const [suntingMessage, setIsSuntingMessage] = useState(false);
+
+  const isSuntingMessage = () => {
+    setIsSuntingMessage(!suntingMessage);
+  };
+
   return (
     <>
       {isSender ? (
         <div className="pb-[10px] flex justify-end">
-          <div className="pt-[30px] pr-[5px] cursor-pointer">
+          <div
+            className="relative pt-[30px] pr-[5px] cursor-pointer"
+            onClick={isSuntingMessage}
+          >
+            <div
+              className={`absolute w-[126px] h-[80px] bg-[#FFFFFF] rounded-[5px] border-[1px] border-[#BDBDBD] top-[43px] ${
+                suntingMessage ? "" : "hidden"
+              }`}
+            >
+              <div className="flex-col">
+                <div className="flex items-center pl-[18.39px] border-b-[1px] border-b-[#BDBDBD] h-[40px]">
+                  <span className="font-regular text-[#2F80ED]">Edit</span>
+                </div>
+                <div className="flex items-center h-[40px]">
+                  <span className="pl-[18.39px] font-regular text-[#EB5757]">
+                    Delete
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <svg
               width="12"
               height="4"
@@ -74,7 +102,10 @@ export default function BubbleChat({
             </div>
           </div>
 
-          <div className="pt-[30px] pl-[5px] cursor-pointer">
+          <div
+            className="pt-[30px] pl-[5px] cursor-pointer relative"
+            onClick={isSuntingMessage}
+          >
             <svg
               width="12"
               height="4"
@@ -89,6 +120,23 @@ export default function BubbleChat({
                 fill="#4F4F4F"
               />
             </svg>
+
+            <div
+              className={`absolute w-[126px] h-[80px] bg-[#FFFFFF] rounded-[5px] border-[1px] border-[#BDBDBD] top-[43px] ${
+                suntingMessage ? "" : "hidden"
+              }`}
+            >
+              <div className="flex-col">
+                <div className="flex items-center pl-[18.39px] border-b-[1px] border-b-[#BDBDBD] h-[40px]">
+                  <span className="font-regular text-[#2F80ED]">Edit</span>
+                </div>
+                <div className="flex items-center h-[40px]">
+                  <span className="pl-[18.39px] font-regular text-[#EB5757]">
+                    Delete
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
