@@ -1,4 +1,5 @@
 import BubbleChat from "./BubbleChat";
+import ChatDivider from "./ChatDivider";
 
 export default function ChatSection() {
   return (
@@ -58,6 +59,7 @@ export default function ChatSection() {
             isSender={true}
             userColor={["#9B51E0", "#EEDCFF"]}
           />
+          <ChatDivider date={"Today June 09, 2021"} isNewMessage={false} />
           <BubbleChat
             name={"Marry Hilda"}
             message={
@@ -83,20 +85,7 @@ export default function ChatSection() {
             isSender={false}
             userColor={["#E5A443", "#FCEED3"]}
           />
-          <BubbleChat
-            name={"Obaidullah Amarkhil"}
-            message={"Morning. I’ll try to do them. Thanks"}
-            date={"19.32"}
-            isSender={false}
-            userColor={["#43B78D", "#D2F2EA"]}
-          />
-          <BubbleChat
-            name={"Obaidullah Amarkhil"}
-            message={"Morning. I’ll try to do them. Thanks"}
-            date={"19.32"}
-            isSender={false}
-            userColor={["#43B78D", "#D2F2EA"]}
-          />
+          <ChatDivider date={""} isNewMessage={true} />
           <BubbleChat
             name={"Obaidullah Amarkhil"}
             message={"Morning. I’ll try to do them. Thanks"}
@@ -106,6 +95,8 @@ export default function ChatSection() {
           />
         </div>
       </div>
+
+      <div className="">INI TYPING</div>
     </div>
   );
 }
