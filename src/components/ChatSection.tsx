@@ -44,48 +44,67 @@ export default function ChatSection() {
         </div>
       </div>
 
-      <div className="flex-col py-[13.5px] px-[20px]">
-        <BubbleChat
-          name={""}
-          message={
-            "No worries. It will be completed ASAP. I’ve asked him yesterday."
-          }
-          date={"19.32"}
-          isSender={true}
-          userColor={["#9B51E0", "#EEDCFF"]}
-        />
-        <BubbleChat
-          name={"Marry Hilda"}
-          message={
-            "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks."
-          }
-          date={"19.32"}
-          isSender={false}
-          userColor={["#E5A443", "#FCEED3"]}
-        />
-        <BubbleChat
-          name={""}
-          message={
-            "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary."
-          }
-          date={"19.32"}
-          isSender={true}
-          userColor={["#9B51E0", "#EEDCFF"]}
-        />
-        <BubbleChat
-          name={"Mary Hilda"}
-          message={"Sure thing, Claren"}
-          date={"19.32"}
-          isSender={false}
-          userColor={["#E5A443", "#FCEED3"]}
-        />
-        <BubbleChat
-          name={"Obaidullah Amarkhil"}
-          message={"Morning. I’ll try to do them. Thanks"}
-          date={"19.32"}
-          isSender={false}
-          userColor={["#43B78D", "#D2F2EA"]}
-        />
+      <div
+        className="flex-col my-[13.5px] ml-[20px] mr-[11px] custom-scrollbar overflow-auto h-[554px]"
+        id="style-3"
+      >
+        <div className="pr-[18px]">
+          <BubbleChat
+            name={""}
+            message={
+              "No worries. It will be completed ASAP. I’ve asked him yesterday."
+            }
+            date={"19.32"}
+            isSender={true}
+            userColor={["#9B51E0", "#EEDCFF"]}
+          />
+          <BubbleChat
+            name={"Marry Hilda"}
+            message={
+              "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks."
+            }
+            date={"19.32"}
+            isSender={false}
+            userColor={["#E5A443", "#FCEED3"]}
+          />
+          <BubbleChat
+            name={""}
+            message={
+              "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary."
+            }
+            date={"19.32"}
+            isSender={true}
+            userColor={["#9B51E0", "#EEDCFF"]}
+          />
+          <BubbleChat
+            name={"Mary Hilda"}
+            message={"Sure thing, Claren"}
+            date={"19.32"}
+            isSender={false}
+            userColor={["#E5A443", "#FCEED3"]}
+          />
+          <BubbleChat
+            name={"Obaidullah Amarkhil"}
+            message={"Morning. I’ll try to do them. Thanks"}
+            date={"19.32"}
+            isSender={false}
+            userColor={["#43B78D", "#D2F2EA"]}
+          />
+          <BubbleChat
+            name={"Obaidullah Amarkhil"}
+            message={"Morning. I’ll try to do them. Thanks"}
+            date={"19.32"}
+            isSender={false}
+            userColor={["#43B78D", "#D2F2EA"]}
+          />
+          <BubbleChat
+            name={"Obaidullah Amarkhil"}
+            message={"Morning. I’ll try to do them. Thanks"}
+            date={"19.32"}
+            isSender={false}
+            userColor={["#43B78D", "#D2F2EA"]}
+          />
+        </div>
       </div>
     </div>
   );

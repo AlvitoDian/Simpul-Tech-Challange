@@ -9,7 +9,7 @@ export default function BubbleChat({
     <>
       {isSender ? (
         <div className="pb-[10px] flex justify-end">
-          <div className="pt-[30px] pr-[5px]">
+          <div className="pt-[30px] pr-[5px] cursor-pointer">
             <svg
               width="12"
               height="4"
@@ -74,7 +74,7 @@ export default function BubbleChat({
             </div>
           </div>
 
-          <div className="pt-[30px] pl-[5px]">
+          <div className="pt-[30px] pl-[5px] cursor-pointer">
             <svg
               width="12"
               height="4"
