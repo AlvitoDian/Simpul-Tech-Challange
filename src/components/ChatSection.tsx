@@ -4,13 +4,6 @@ import ChatDivider from "./ChatDivider";
 export default function ChatSection() {
   return (
     <div className="flex-col relative">
-      <div className="absolute w-[141.83px] h-[33.89px] bg-[#E9F3FF] bottom-[50px] left-1/2 transform -translate-x-1/2 z-[10] rounded-[5px] pt-[4px] px-[12px]">
-        <div className="flex items-center justify-center">
-          <span className="font-bold text-[16px] text-[#2F80ED]">
-            New Message
-          </span>
-        </div>
-      </div>
       <div className="flex justify-between border-b-[1px] border-b-[#BDBDBD]">
         <div className="flex pl-[25px] pt-[17px] pb-[18.44px]">
           <div className="pt-[12px] pr-[13.65px]">
@@ -116,6 +109,14 @@ export default function ChatSection() {
         <button className="flex items-center justify-center bg-[#2F80ED] w-full rounded-[5px] font-bold text-white">
           Send
         </button>
+      </div>
+
+      <div className="absolute w-[141.83px] h-[33.89px] bg-[#E9F3FF] bottom-[50px] left-1/2 transform -translate-x-1/2 z-[10] rounded-[5px] pt-[4px] px-[12px]">
+        <div className="flex items-center justify-center">
+          <span className="font-bold text-[16px] text-[#2F80ED]">
+            New Message
+          </span>
+        </div>
       </div>
     </div>
   );
