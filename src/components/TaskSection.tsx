@@ -25,10 +25,10 @@ export default function TaskSection() {
         </div>
       </div>
 
-      <div className="flex-col">
-        <div className="pt-[22px] flex items-center justify-between">
-          <div className="flex items-center">
-            <div className="flex pl-[29px]">
+      <div className="flex-col border-b-[1px] border-b-[#828282] mx-[29px] pb-[19.58px]">
+        <div className="pt-[22px] flex items-start justify-between">
+          <div className="flex items-start">
+            <div className="flex">
               <input
                 id="checkbox"
                 type="checkbox"
@@ -36,7 +36,7 @@ export default function TaskSection() {
               />
             </div>
 
-            <div className="flex pl-[22.5px]">
+            <div className="flex max-w-[360.37px] pl-[22.5px]">
               <span className="font-bold text-[16px] text-[#4F4F4F]">
                 Close off Case #012920- RODRIGUES, Amiguel
               </span>
@@ -89,7 +89,7 @@ export default function TaskSection() {
           </div>
         </div>
 
-        <div className="flex-col pl-[69.5px]">
+        <div className="flex-col pl-[40.5px]">
           <div className="flex">
             <span>INI TANGGAL</span>
           </div>
