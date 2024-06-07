@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function TaskSection() {
   const [startDate, setStartDate] = useState(new Date());
   const [isMyTasksOpen, setIsMyTasksOpen] = useState(false);
-
   const [text, setText] = useState(
-    "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!"
+    "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!"
   );
+
+  const textareaRef = useRef(null);
+  useEffect(() => {
+    resizeTextarea();
+  }, []);
+
+  function resizeTextarea() {
+    const textarea = textareaRef.current;
+    const charCount = text.length;
+    const extraHeight = Math.floor(charCount / 70) * 20;
+    textarea.style.height = `${extraHeight + textarea.scrollHeight}px`;
+  }
 
   const myTasksDropdown = () => {
     setIsMyTasksOpen(!isMyTasksOpen);
@@ -202,16 +213,12 @@ export default function TaskSection() {
                 <div className="max-w-[518.24px]">
                   <p className="text-justify text-[14px] font-regular text-[#4F4F4F]">
                     <textarea
+                      ref={textareaRef}
                       onChange={(e) => setText(e.target.value)}
                       onBlur={handleBlur}
-                      className="w-[600px]"
-                    >
-                      Closing off this case since this application has been
-                      cancelled. No one really understand how this case could
-                      possibly be cancelled. The options and the documents
-                      within this document were totally a guaranteed for a
-                      success!
-                    </textarea>
+                      className="w-[600px] h-[20px]"
+                      value={text}
+                    />
                   </p>
                 </div>
               </div>
