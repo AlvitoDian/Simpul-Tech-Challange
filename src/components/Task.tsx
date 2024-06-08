@@ -4,14 +4,62 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Task({ title, date, description, isDone }) {
   const textareaRef = useRef(null);
+  const inputRef = useRef(null);
 
   const [startDate, setStartDate] = useState(date);
+  const [isChecked, setIsChecked] = useState(isDone);
+  const [isCloseDetailTask, setIsCloseDetailTask] = useState(false);
+
+  const [isFocusedDate, setIsFocusedDate] = useState(false);
+
+  const [newTitle, setNewTitle] = useState(title);
+  const [isInputTitle, setIsInputTitle] = useState(false);
+
   const [text, setText] = useState(
     description ? description : "No Description"
   );
-  const [isChecked, setIsChecked] = useState(isDone);
-  const [isCloseDetailTask, setIsCloseDetailTask] = useState(false);
-  const [isFocusedDate, setIsFocusedDate] = useState(false);
+  const [isInputText, setIsInputText] = useState(false);
+
+  //? Handle Input Text
+  const handleClickSpanText = () => {
+    setIsInputText(true);
+    setTimeout(() => {
+      textareaRef.current.focus();
+    }, 0);
+  };
+
+  const handleInputText = (e) => {
+    if (e.target.value === "") {
+      setText("No Description");
+    }
+    setText(e.target.value);
+  };
+
+  const handleBlurText = (e) => {
+    console.log("Description Changed : ", text);
+    if (e.target.value === "") {
+      setText("No Description");
+    }
+    setIsInputText(false);
+  };
+  //? Handle Input Text End
+
+  //? Handle Input Title
+  const handleClickSpanTitle = () => {
+    setIsInputTitle(true);
+    setTimeout(() => {
+      inputRef.current.focus();
+    }, 0);
+  };
+
+  const handleInputTitle = (e) => {
+    setNewTitle(e.target.value);
+  };
+
+  const handleBlurTitle = (e) => {
+    setIsInputTitle(false);
+  };
+  //? Handle Input Title End
 
   const handleFocusDateChange = () => {
     setIsFocusedDate(true);
@@ -28,13 +76,9 @@ export default function Task({ title, date, description, isDone }) {
     textarea.style.height = `${extraHeight + textarea.scrollHeight}px`;
   }
 
-  useEffect(() => {
+  /*   useEffect(() => {
     resizeTextarea();
-  }, []);
-
-  const handleDescriptionChange = () => {
-    console.log("Description Changed : ", text);
-  };
+  }, []); */
 
   const handleDateChange = (date) => {
     setStartDate(date);
@@ -51,7 +95,7 @@ export default function Task({ title, date, description, isDone }) {
 
   return (
     <div
-      className={`flex-col border-b-[1px] border-b-[#828282] ml-[29px] mr-[13px]  ${
+      className={`flex-col border-b-[1px] border-b-[#828282] ml-[29px] mr-[13px] ${
         isCloseDetailTask ? "pb-[8px]" : "pb-[22px]"
       }`}
     >
@@ -72,13 +116,27 @@ export default function Task({ title, date, description, isDone }) {
           </div>
 
           <div className="flex max-w-[360.37px] pl-[22.5px]">
-            <span
-              className={`font-bold text-[16px] text-[#4F4F4F] ${
-                isChecked ? "line-through text-[#828282]" : ""
-              }`}
-            >
-              {title}
-            </span>
+            {isInputTitle ? (
+              <input
+                type="text"
+                ref={inputRef}
+                onChange={handleInputTitle}
+                onBlur={handleBlurTitle}
+                className={`font-bold text-[16px] h-[40px] w-[380px] text-[#4F4F4F] border border-transparent focus:border-[#828282] ${
+                  isChecked ? "line-through text-[#828282]" : ""
+                }`}
+                value={newTitle}
+              />
+            ) : (
+              <span
+                onClick={handleClickSpanTitle}
+                className={`font-bold text-[16px] text-[#4F4F4F] ${
+                  isChecked ? "line-through text-[#828282]" : ""
+                }`}
+              >
+                {newTitle}
+              </span>
+            )}
           </div>
         </div>
 
@@ -212,8 +270,8 @@ export default function Task({ title, date, description, isDone }) {
 
             <div className="pl-[18px]">
               <div className="relative flex items-center">
-                <p className="text-justify text-[14px] font-regular text-[#4F4F4F]">
-                  <textarea
+                <div className="text-justify text-[14px] font-regular text-[#4F4F4F]">
+                  {/*   <textarea
                     ref={textareaRef}
                     onChange={(e) => setText(e.target.value)}
                     onBlur={handleDescriptionChange}
@@ -225,8 +283,32 @@ export default function Task({ title, date, description, isDone }) {
                     }}
                     className="w-[518.24px]"
                     value={text}
-                  />
-                </p>
+                  /> */}
+                  {/*    <div className="w-[518.24px]">
+                    <span>{text}</span>
+                  </div> */}
+
+                  {isInputText ? (
+                    <textarea
+                      ref={textareaRef}
+                      /*  onChange={(e) => setText(e.target.value)} */
+                      onChange={handleInputText}
+                      onBlur={handleBlurText}
+                      onFocus={(e) => {
+                        const isValueNull = e.target.value === "No Description";
+                        if (isValueNull) {
+                          setText("");
+                        }
+                      }}
+                      className="w-[518.24px]"
+                      value={text}
+                    />
+                  ) : (
+                    <div className="w-[518.24px]" onClick={handleClickSpanText}>
+                      <span>{text}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
