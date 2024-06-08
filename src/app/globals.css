@@ -98,6 +98,26 @@
   }
 }
 
+.custom-datepicker::placeholder {
+  color: #4f4f4f;
+}
+
+.custom-datepicker::-webkit-input-placeholder {
+  color: #4f4f4f;
+}
+
+.custom-datepicker::-moz-placeholder {
+  color: #4f4f4f;
+}
+
+.custom-datepicker:-ms-input-placeholder {
+  color: #4f4f4f;
+}
+
+.custom-datepicker:-moz-placeholder {
+  color: #4f4f4f;
+}
+
 @keyframes slideIn {
   from {
     opacity: 0%;
