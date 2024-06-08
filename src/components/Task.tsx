@@ -13,7 +13,7 @@ export default function Task({ title, date, description, isDone }) {
   function resizeTextarea() {
     const textarea = textareaRef.current;
     const charCount = text.length;
-    const extraHeight = Math.floor(charCount / 86) * 20 + 20;
+    const extraHeight = Math.floor(charCount / 70) * 20 + 20;
     textarea.style.height = `${extraHeight + textarea.scrollHeight}px`;
   }
 
@@ -30,7 +30,7 @@ export default function Task({ title, date, description, isDone }) {
     console.log("Date Changed : ", date);
   };
   return (
-    <div className="flex-col border-b-[1px] border-b-[#828282] mx-[29px] pb-[19.58px]">
+    <div className="flex-col border-b-[1px] border-b-[#828282] ml-[29px] mr-[13px] pb-[19.58px]">
       <div className="pt-[22px] flex items-start justify-between">
         <div className="flex items-start">
           <div className="flex">
@@ -48,7 +48,7 @@ export default function Task({ title, date, description, isDone }) {
           </div>
         </div>
 
-        <div className="flex pr-[34px] items-center">
+        <div className="flex pr-[24px] items-center">
           <div className="pr-[19.75px]">
             <span className="text-[14px] font-regular text-[#EB5757]">
               2 Days Left
@@ -159,7 +159,7 @@ export default function Task({ title, date, description, isDone }) {
 
           <div className="pl-[18px]">
             <div className="relative flex items-center">
-              <div className="max-w-[518.24px]">
+              <div className="">
                 <p className="text-justify text-[14px] font-regular text-[#4F4F4F]">
                   <textarea
                     ref={textareaRef}
@@ -167,12 +167,11 @@ export default function Task({ title, date, description, isDone }) {
                     onBlur={handleDescriptionChange}
                     onFocus={(e) => {
                       const isValueNull = e.target.value === "No Description";
-                      console.log(isValueNull);
                       if (isValueNull) {
                         setText("");
                       }
                     }}
-                    className="w-[600px]"
+                    className="w-[518.24px]"
                     value={text}
                   />
                 </p>

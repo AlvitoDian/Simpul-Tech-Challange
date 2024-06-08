@@ -10,7 +10,7 @@ export default function TaskSection() {
 
   return (
     <div className="flex-col">
-      <div className="flex justify-between pl-[114px] pr-[23px] pt-[18px]">
+      <div className="flex justify-between pl-[114px] pr-[23px] pt-[18px] mb-[22px]">
         <div className="relative flex items-center justify-between border-[1px] border-[#828282] rounded-[5px] py-[7px] px-[10px] cursor-pointer">
           <div className="flex items-center" onClick={myTasksDropdown}>
             <span className="text-[16px] font-bold text-[#4F4F4F]">
@@ -53,7 +53,7 @@ export default function TaskSection() {
         </div>
       </div>
       <div
-        className="flex-col custom-scrollbar overflow-auto h-[554px]"
+        className="flex-col custom-scrollbar overflow-auto h-[629px] mr-[13px]"
         id="style-3"
       >
         <Task
@@ -72,6 +72,18 @@ export default function TaskSection() {
           description={
             "All Cases must include all payment transactions, all documents and forms filled. All conversations in comments and messages in channels and emails should be provided as well in."
           }
+          isDone={false}
+        />
+        <Task
+          title={"Set up appointment with Dr Blake"}
+          date={new Date(2021, 6, 22)}
+          description={""}
+          isDone={false}
+        />
+        <Task
+          title={"Set up appointment with Dr Blake"}
+          date={new Date(2021, 6, 22)}
+          description={""}
           isDone={false}
         />
         <Task
