@@ -78,19 +78,7 @@ export default function TaskSection() {
           title={"Set up appointment with Dr Blake"}
           date={new Date(2021, 6, 22)}
           description={""}
-          isDone={false}
-        />
-        <Task
-          title={"Set up appointment with Dr Blake"}
-          date={new Date(2021, 6, 22)}
-          description={""}
-          isDone={false}
-        />
-        <Task
-          title={"Set up appointment with Dr Blake"}
-          date={new Date(2021, 6, 22)}
-          description={""}
-          isDone={false}
+          isDone={true}
         />
       </div>
     </div>

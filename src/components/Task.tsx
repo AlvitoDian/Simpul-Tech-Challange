@@ -9,8 +9,17 @@ export default function Task({ title, date, description, isDone }) {
   const [text, setText] = useState(
     description ? description : "No Description"
   );
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(isDone);
   const [isCloseDetailTask, setIsCloseDetailTask] = useState(false);
+  const [isFocusedDate, setIsFocusedDate] = useState(false);
+
+  const handleFocusDateChange = () => {
+    setIsFocusedDate(true);
+  };
+
+  const handleBlurDateChange = () => {
+    setIsFocusedDate(false);
+  };
 
   function resizeTextarea() {
     const textarea = textareaRef.current;
@@ -36,14 +45,14 @@ export default function Task({ title, date, description, isDone }) {
     setIsChecked(e.target.checked);
   };
 
-  const handleOpenDetailTask = () => {
+  const handleOpenDetailTask = async () => {
     setIsCloseDetailTask(!isCloseDetailTask);
   };
 
   return (
     <div
       className={`flex-col border-b-[1px] border-b-[#828282] ml-[29px] mr-[13px]  ${
-        isCloseDetailTask ? "pb-[5.58px]" : "pb-[19.58px]"
+        isCloseDetailTask ? "pb-[8px]" : "pb-[22px]"
       }`}
     >
       <div className="pt-[22px] flex items-center justify-between mb-[14px]">
@@ -75,7 +84,11 @@ export default function Task({ title, date, description, isDone }) {
 
         <div className="flex pr-[24px] items-center">
           <div className="pr-[19.75px]">
-            <span className="text-[14px] font-regular text-[#EB5757]">
+            <span
+              className={`text-[14px] font-regular text-[#EB5757] ${
+                isChecked ? "hidden" : ""
+              }`}
+            >
               2 Days Left
             </span>
           </div>
@@ -128,7 +141,7 @@ export default function Task({ title, date, description, isDone }) {
           isCloseDetailTask ? "" : "is-open"
         }`}
       >
-        <div className={`inner transition duration-100`}>
+        <div className={`${isFocusedDate ? "inner-visibel" : "inner-hidden"}`}>
           <div className="flex items-center">
             <div>
               <svg
@@ -156,6 +169,8 @@ export default function Task({ title, date, description, isDone }) {
                   dateFormat="dd/MM/yyyy"
                   popperClassName="custom-popper"
                   placeholderText="Set Date"
+                  onFocus={handleFocusDateChange}
+                  onBlur={handleBlurDateChange}
                 />
                 <div className="absolute right-[12.67px]">
                   <label htmlFor="custom-datepicker-input">
@@ -197,23 +212,21 @@ export default function Task({ title, date, description, isDone }) {
 
             <div className="pl-[18px]">
               <div className="relative flex items-center">
-                <div className="">
-                  <p className="text-justify text-[14px] font-regular text-[#4F4F4F]">
-                    <textarea
-                      ref={textareaRef}
-                      onChange={(e) => setText(e.target.value)}
-                      onBlur={handleDescriptionChange}
-                      onFocus={(e) => {
-                        const isValueNull = e.target.value === "No Description";
-                        if (isValueNull) {
-                          setText("");
-                        }
-                      }}
-                      className="w-[518.24px]"
-                      value={text}
-                    />
-                  </p>
-                </div>
+                <p className="text-justify text-[14px] font-regular text-[#4F4F4F]">
+                  <textarea
+                    ref={textareaRef}
+                    onChange={(e) => setText(e.target.value)}
+                    onBlur={handleDescriptionChange}
+                    onFocus={(e) => {
+                      const isValueNull = e.target.value === "No Description";
+                      if (isValueNull) {
+                        setText("");
+                      }
+                    }}
+                    className="w-[518.24px]"
+                    value={text}
+                  />
+                </p>
               </div>
             </div>
           </div>
