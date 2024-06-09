@@ -1,4 +1,4 @@
-export default function LoadingChats() {
+export default function LoadingTasks() {
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <div className="flex-col items-center justify-center">
@@ -29,7 +29,9 @@ export default function LoadingChats() {
         </div>
 
         <div className="flex justify-center">
-          <span className="font-bold text-[#4F4F4F]">Loading Chats ...</span>
+          <span className="font-bold text-[#4F4F4F]">
+            Loading Task List ...
+          </span>
         </div>
       </div>
     </div>

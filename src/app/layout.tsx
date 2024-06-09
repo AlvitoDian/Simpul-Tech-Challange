@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Lato } from "next/font/google"; // Ganti dengan Lato
+import { Lato } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
+import { TaskProvider } from "@/contexts/TaskContext";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -26,7 +27,9 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
       </Head>
-      <body className={lato.className}>{children}</body>
+      <body className={lato.className}>
+        <TaskProvider>{children}</TaskProvider>
+      </body>
     </html>
   );
 }

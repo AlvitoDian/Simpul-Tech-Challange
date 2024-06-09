@@ -1,49 +1,17 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Task from "./Task";
+import { useTask } from "@/contexts/TaskContext";
+import LoadingTasks from "./LoadingTasks";
 
 export default function TaskSection() {
+  const { tasks, setTasks, addNewTask, taskLoading } = useTask();
+
   const [isMyTasksOpen, setIsMyTasksOpen] = useState(false);
 
   const myTasksDropdown = () => {
     setIsMyTasksOpen(!isMyTasksOpen);
-  };
-
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Close off Case #012920- RODRIGUES, Amiguel",
-      date: new Date(2021, 6, 12),
-      description:
-        "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!",
-      isDone: false,
-    },
-    {
-      id: 2,
-      title:
-        "Set up documentation report for several Cases : Case 145443, Case 192829 and Case 182203",
-      date: new Date(2021, 5, 14),
-      description:
-        "All Cases must include all payment transactions, all documents and forms filled. All conversations in comments and messages in channels and emails should be provided as well in.",
-      isDone: false,
-    },
-    {
-      id: 3,
-      title: "Set up appointment with Dr Blake",
-      date: new Date(2021, 6, 22),
-      description: "",
-      isDone: true,
-    },
-  ]);
-
-  const addNewTask = () => {
-    const newTask = {
-      id: tasks.length + 1,
-      title: "",
-      date: null,
-      description: "",
-      isDone: false,
-    };
-    setTasks([...tasks, newTask]);
   };
 
   return (
@@ -93,20 +61,25 @@ export default function TaskSection() {
           <span className="text-[16px] font-bold text-[#FFFFFF]">New Task</span>
         </div>
       </div>
-      <div
-        className="flex-col custom-scrollbar overflow-auto h-[629px] mr-[13px]"
-        id="style-3"
-      >
-        {tasks.map((task, index) => (
-          <Task
-            key={index}
-            title={task.title}
-            date={task.date}
-            description={task.description}
-            isDone={task.isDone}
-          />
-        ))}
-      </div>
+      {taskLoading ? (
+        <LoadingTasks />
+      ) : (
+        <div
+          className="flex-col custom-scrollbar overflow-auto h-[629px] mr-[13px]"
+          id="style-3"
+        >
+          {tasks.map((task, index) => (
+            <Task
+              key={index}
+              id={task.id}
+              title={task.title}
+              date={task.date}
+              description={task.description}
+              isDone={task.isDone}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

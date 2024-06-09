@@ -5,8 +5,11 @@ import DefaultButton from "./DefaultButton";
 import InboxButton from "./InboxButton";
 import TaskButton from "./TaskButton";
 import ActiveBoxAction from "./ActiveBoxAction";
+import { useTask } from "@/contexts/TaskContext";
 
 export default function FAB() {
+  const { tasks, fetchTasks } = useTask();
+
   const [isOpenQuicks, setIsOpenQuicks] = useState(false);
   const [isOpenInbox, setIsOpenInbox] = useState(false);
   const [isOpenTask, setIsOpenTask] = useState(false);
@@ -29,6 +32,7 @@ export default function FAB() {
   };
 
   const handleTaskButtonClick = () => {
+    fetchTasks();
     setIsOpenTask(!isOpenTask);
     if (isOpenTask) {
       setIsOpenQuicks(!isOpenQuicks);
