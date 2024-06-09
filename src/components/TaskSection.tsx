@@ -10,6 +10,7 @@ export default function TaskSection() {
 
   const [tasks, setTasks] = useState([
     {
+      id: 1,
       title: "Close off Case #012920- RODRIGUES, Amiguel",
       date: new Date(2021, 6, 12),
       description:
@@ -17,6 +18,7 @@ export default function TaskSection() {
       isDone: false,
     },
     {
+      id: 2,
       title:
         "Set up documentation report for several Cases : Case 145443, Case 192829 and Case 182203",
       date: new Date(2021, 5, 14),
@@ -25,6 +27,7 @@ export default function TaskSection() {
       isDone: false,
     },
     {
+      id: 3,
       title: "Set up appointment with Dr Blake",
       date: new Date(2021, 6, 22),
       description: "",
@@ -34,6 +37,7 @@ export default function TaskSection() {
 
   const addNewTask = () => {
     const newTask = {
+      id: tasks.length + 1,
       title: "",
       date: null,
       description: "",

@@ -12,7 +12,9 @@ export default function Task({ title, date, description, isDone }) {
 
   const [isFocusedDate, setIsFocusedDate] = useState(false);
 
-  const [newTitle, setNewTitle] = useState(title ? title : "Type Task Title");
+  const [newTitle, setNewTitle] = useState(
+    title /*  ? title : "Type Task Title" */
+  );
   const [isInputTitle, setIsInputTitle] = useState(false);
 
   const [text, setText] = useState(
@@ -53,13 +55,16 @@ export default function Task({ title, date, description, isDone }) {
   };
 
   const handleInputTitle = (e) => {
+    if (newTitle === "") {
+      setIsInputTitle(true);
+    }
     setNewTitle(e.target.value);
   };
 
   const handleBlurTitle = (e) => {
-    if (e.target.value === "") {
+    /*   if (e.target.value === "") {
       setNewTitle("Type Task Title");
-    }
+    } */
     setIsInputTitle(false);
   };
   //? Handle Input Title End
@@ -133,7 +138,7 @@ export default function Task({ title, date, description, isDone }) {
           </div>
 
           <div className="flex max-w-[360.37px] pl-[22.5px]">
-            {isInputTitle ? (
+            {isInputTitle || newTitle === "" ? (
               <input
                 id="inputTitle"
                 type="text"
@@ -141,7 +146,7 @@ export default function Task({ title, date, description, isDone }) {
                 ref={inputRef}
                 onChange={handleInputTitle}
                 onBlur={handleBlurTitle}
-                className={`font-bold text-[16px] h-[40px] w-[380px] text-[#4F4F4F] border-[1px] border-[#828282] ${
+                className={`font-bold text-[16px] h-[40px] w-[380px] text-[#4F4F4F] border-[1px] border-[#828282] rounded-[5px] px-[14.22px] ${
                   isChecked ? "line-through text-[#828282]" : ""
                 } placeholder-[#4F4F4F]`}
                 value={newTitle}
