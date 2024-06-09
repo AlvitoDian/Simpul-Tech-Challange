@@ -7,7 +7,7 @@ export default function Contact({ subject, name, message, date, isRead }) {
   };
 
   return (
-    <div className="flex items-start mx-[32px] pt-[26px] border-b-[1px] border-b-[#828282] pb-[37px] relative">
+    <div className="flex items-start mx-[32px] pt-[26px] border-b-[1px] border-b-[#828282] pb-[37px] relative cursor-pointer">
       <div className="flex">
         <div className="w-[34px] h-[34px] bg-[#E0E0E0] rounded-full flex items-center justify-center">
           <svg

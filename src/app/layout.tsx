@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import { TaskProvider } from "@/contexts/TaskContext";
+import { InboxProvider } from "@/contexts/InboxContext";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -28,7 +29,9 @@ export default function RootLayout({
         />
       </Head>
       <body className={lato.className}>
-        <TaskProvider>{children}</TaskProvider>
+        <TaskProvider>
+          <InboxProvider>{children}</InboxProvider>
+        </TaskProvider>
       </body>
     </html>
   );

@@ -1,20 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DefaultButton from "./DefaultButton";
 import InboxButton from "./InboxButton";
 import TaskButton from "./TaskButton";
 import ActiveBoxAction from "./ActiveBoxAction";
 import { useTask } from "@/contexts/TaskContext";
+import { useInbox } from "@/contexts/InboxContext";
 
 export default function FAB() {
   const { tasks, fetchTasks } = useTask();
+  const { chatSection, exitChat, setExitChat } = useInbox();
 
   const [isOpenQuicks, setIsOpenQuicks] = useState(false);
   const [isOpenInbox, setIsOpenInbox] = useState(false);
   const [isOpenTask, setIsOpenTask] = useState(false);
 
+  useEffect(() => {
+    if (exitChat) {
+      setIsOpenInbox(false);
+    }
+  }, [exitChat]);
+
   const handleOpenQuicks = () => {
+    if (exitChat) {
+      setExitChat(false);
+    }
     /*   if (isOpenInbox) {
       setIsOpenInbox(false);
     } else if (isOpenTask) {
@@ -42,6 +53,10 @@ export default function FAB() {
   };
 
   const handleInboxButtonClick = async () => {
+    if (exitChat) {
+      setExitChat(false);
+    }
+
     setIsOpenInbox(!isOpenInbox);
     if (isOpenInbox) {
       setIsOpenQuicks(!isOpenQuicks);

@@ -2,9 +2,40 @@ import LoadingChats from "./LoadingChats";
 import { useState, useEffect } from "react";
 import Contact from "./Contact";
 import SupportContact from "./SupportContact";
+import { useInbox } from "@/contexts/InboxContext";
 
-export default function ContactLists() {
+export default function ContactList() {
+  const { setChatSection } = useInbox();
   const [showContent, setShowContent] = useState(true);
+
+  const [contactList, setContactList] = useState([
+    {
+      id: 1,
+      subject: "109220-Naturalization",
+      name: "Cameron Philips :",
+      message: "Please check this out!",
+      date: "January, 1,2021 19:10",
+      isRead: false,
+    },
+    {
+      id: 2,
+      subject:
+        "Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]",
+      name: "Ellen :",
+      message: "Hey, please read.",
+      date: "02/06/2021 10:45",
+      isRead: true,
+    },
+    {
+      id: 3,
+      subject: "8405-Diana SALAZAR MUNGUIA",
+      name: "Cameron Philips :",
+      message:
+        "I understand your initial concerns and thats very valid, Elizabeth. But you bla bla bla bla bla bla",
+      date: "01/06/2021 12:19",
+      isRead: true,
+    },
+  ]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -13,6 +44,11 @@ export default function ContactLists() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const openChat = (id) => {
+    setChatSection(true);
+  };
+
   return (
     <>
       {/* Searchbar */}
@@ -47,31 +83,17 @@ export default function ContactLists() {
         <LoadingChats />
       ) : (
         <div className="flex-col">
-          <Contact
-            subject={"109220-Naturalization"}
-            name={"Cameron Philips :"}
-            message={"Please check this out!"}
-            date={"January, 1,2021 19:10"}
-            isRead={false}
-          />
-          <Contact
-            subject={
-              "Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]"
-            }
-            name={"Ellen :"}
-            message={"Hey, please read."}
-            date={"02/06/2021 10:45"}
-            isRead={true}
-          />
-          <Contact
-            subject={"8405-Diana SALAZAR MUNGUIA"}
-            name={"Cameron Philips :"}
-            message={
-              "I understand your initial concerns and thats very valid, Elizabeth. But you bla bla bla bla bla bla"
-            }
-            date={"01/06/2021 12:19"}
-            isRead={true}
-          />
+          {contactList.map((contact, index) => (
+            <div key={index} onClick={() => openChat(contact.id)}>
+              <Contact
+                subject={contact.subject}
+                name={contact.name}
+                message={contact.message}
+                date={contact.date}
+                isRead={contact.isRead}
+              />
+            </div>
+          ))}
           <SupportContact
             name={"FastVisa Support"}
             message={"Hey there! Welcome to your inbox."}

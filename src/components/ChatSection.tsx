@@ -1,12 +1,26 @@
 import BubbleChat from "./BubbleChat";
 import ChatDivider from "./ChatDivider";
+import { useInbox } from "@/contexts/InboxContext";
 
 export default function ChatSection() {
+  const { setChatSection, setExitChat } = useInbox();
+
+  const closeChat = () => {
+    setChatSection(false);
+  };
+
+  const exitChat = () => {
+    setExitChat(true);
+  };
+
   return (
     <div className="flex-col relative">
       <div className="flex justify-between border-b-[1px] border-b-[#BDBDBD]">
         <div className="flex pl-[25px] pt-[17px] pb-[18.44px]">
-          <div className="pt-[12px] pr-[13.65px]">
+          <div
+            className="pt-[12px] pr-[13.65px] cursor-pointer"
+            onClick={closeChat}
+          >
             <svg
               width="16"
               height="16"
@@ -30,7 +44,10 @@ export default function ChatSection() {
           </div>
         </div>
 
-        <div className=" pt-[29px] pb-[18.44px] pr-[21px]">
+        <div
+          className=" pt-[29px] pb-[18.44px] pr-[21px] cursor-pointer"
+          onClick={exitChat}
+        >
           <svg
             width="14"
             height="14"

@@ -7,7 +7,7 @@ export default function SupportContact({ name, message, date, isRead }) {
   };
 
   return (
-    <div className="flex items-start mx-[32px] pt-[26px] pb-[37px] relative">
+    <div className="flex items-start mx-[32px] pt-[26px] pb-[37px] relative cursor-pointer">
       <div className="flex justify-center w-[51px]">
         <div className="w-[34px] h-[34px] bg-[#2F80ED] rounded-full flex items-start pt-[8px] justify-center ">
           <svg
