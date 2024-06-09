@@ -146,3 +146,7 @@
 .inner-visible {
   overflow: visible !important;
 }
+
+#inputTitle::placeholder {
+  font-weight: 400;
+}

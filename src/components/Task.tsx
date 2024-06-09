@@ -12,7 +12,7 @@ export default function Task({ title, date, description, isDone }) {
 
   const [isFocusedDate, setIsFocusedDate] = useState(false);
 
-  const [newTitle, setNewTitle] = useState(title);
+  const [newTitle, setNewTitle] = useState(title ? title : "Type Task Title");
   const [isInputTitle, setIsInputTitle] = useState(false);
 
   const [text, setText] = useState(
@@ -57,6 +57,9 @@ export default function Task({ title, date, description, isDone }) {
   };
 
   const handleBlurTitle = (e) => {
+    if (e.target.value === "") {
+      setNewTitle("Type Task Title");
+    }
     setIsInputTitle(false);
   };
   //? Handle Input Title End
@@ -93,6 +96,20 @@ export default function Task({ title, date, description, isDone }) {
     setIsCloseDetailTask(!isCloseDetailTask);
   };
 
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  const calculateDaysLeft = (dueDate) => {
+    const currentDate = new Date();
+    const timeDifference = dueDate.getTime() - currentDate.getTime();
+    const daysLeft = Math.ceil(timeDifference / (1000 * 3600 * 24));
+    return daysLeft > 0 ? `${daysLeft} days left` : "Due date passed";
+  };
+
   return (
     <div
       className={`flex-col border-b-[1px] border-b-[#828282] ml-[29px] mr-[13px] ${
@@ -118,13 +135,15 @@ export default function Task({ title, date, description, isDone }) {
           <div className="flex max-w-[360.37px] pl-[22.5px]">
             {isInputTitle ? (
               <input
+                id="inputTitle"
                 type="text"
+                placeholder="Type Task Title"
                 ref={inputRef}
                 onChange={handleInputTitle}
                 onBlur={handleBlurTitle}
-                className={`font-bold text-[16px] h-[40px] w-[380px] text-[#4F4F4F] border border-transparent focus:border-[#828282] ${
+                className={`font-bold text-[16px] h-[40px] w-[380px] text-[#4F4F4F] border-[1px] border-[#828282] ${
                   isChecked ? "line-through text-[#828282]" : ""
-                }`}
+                } placeholder-[#4F4F4F]`}
                 value={newTitle}
               />
             ) : (
@@ -147,12 +166,12 @@ export default function Task({ title, date, description, isDone }) {
                 isChecked ? "hidden" : ""
               }`}
             >
-              2 Days Left
+              {startDate ? calculateDaysLeft(startDate) : ""}
             </span>
           </div>
           <div className="pr-[10.32px]">
             <span className="text-[14px] font-regular text-[#4F4F4F]">
-              12/06/2021
+              {startDate ? formatDate(startDate) : ""}
             </span>
           </div>
 
