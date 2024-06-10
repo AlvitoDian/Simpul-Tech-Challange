@@ -1,3 +1,5 @@
+"use client";
+
 import LoadingChats from "./LoadingChats";
 import { useState, useEffect } from "react";
 import Contact from "./Contact";

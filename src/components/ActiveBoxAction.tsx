@@ -1,3 +1,5 @@
+"use client";
+
 import ContactList from "./ContactList";
 import ChatSection from "./ChatSection";
 import TaskSection from "./TaskSection";
