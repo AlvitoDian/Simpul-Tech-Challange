@@ -10,9 +10,15 @@ export default function TaskSection() {
 
   const [isMyTasksOpen, setIsMyTasksOpen] = useState(false);
 
+  /*   useEffect(() => {
+    updateTasks()
+  }, [tasks]);
+ */
   const myTasksDropdown = () => {
     setIsMyTasksOpen(!isMyTasksOpen);
   };
+
+  console.log(tasks, "section");
 
   return (
     <div className="flex-col">
@@ -70,7 +76,7 @@ export default function TaskSection() {
         >
           {tasks.map((task, index) => (
             <Task
-              key={index}
+              key={task.id}
               id={task.id}
               title={task.title}
               date={task.date}

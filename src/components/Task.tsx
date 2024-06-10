@@ -126,6 +126,7 @@ export default function Task({ id, title, date, description, isDone }) {
   };
 
   const handleDeleteTask = async (id) => {
+    console.log("delte", id);
     await deleteTask(id);
   };
 

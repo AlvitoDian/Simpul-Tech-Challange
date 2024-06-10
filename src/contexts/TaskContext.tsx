@@ -80,14 +80,11 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({
       description: "",
       isDone: false,
     };
-    setTasks([...tasks, newTask]);
+    setTasks([newTask, ...tasks]);
   };
 
   const deleteTask = async (id: number) => {
     try {
-      await fetch(`https://dummyjson.com/todos/${id}`, {
-        method: "DELETE",
-      });
       setTasks(tasks.filter((task) => task.id !== id));
     } catch (error) {
       console.error("Error deleting task: ", error);

@@ -5,8 +5,9 @@ import SupportContact from "./SupportContact";
 import { useInbox } from "@/contexts/InboxContext";
 
 export default function ContactList() {
-  const { setChatSection } = useInbox();
+  const { setChatSection, selectContact } = useInbox();
   const [showContent, setShowContent] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [contactList, setContactList] = useState([
     {
@@ -45,9 +46,18 @@ export default function ContactList() {
     return () => clearTimeout(timer);
   }, []);
 
-  const openChat = (id) => {
+  const openChat = (contact) => {
+    selectContact(contact);
     setChatSection(true);
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredContacts = contactList.filter((contact) =>
+    contact.subject.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -58,7 +68,9 @@ export default function ContactList() {
             type="text"
             placeholder="Search"
             className="font-regular border-[1px] border-[#828282] rounded-[5px] w-[666px] h-[32px] 
-            placeholder-[#333333] pl-[68.82px] "
+            placeholder-[#333333] pl-[68.82px]"
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
           <div className="absolute right-[58.82px] bottom-[10px] cursor-pointer">
             <svg
@@ -83,8 +95,8 @@ export default function ContactList() {
         <LoadingChats />
       ) : (
         <div className="flex-col">
-          {contactList.map((contact, index) => (
-            <div key={index} onClick={() => openChat(contact.id)}>
+          {filteredContacts.map((contact, index) => (
+            <div key={index} onClick={() => openChat(contact)}>
               <Contact
                 subject={contact.subject}
                 name={contact.name}
@@ -94,12 +106,24 @@ export default function ContactList() {
               />
             </div>
           ))}
-          <SupportContact
-            name={"FastVisa Support"}
-            message={"Hey there! Welcome to your inbox."}
-            date={"01/16/2021 12:19"}
-            isRead={true}
-          />
+          <div
+            onClick={() =>
+              openChat({
+                id: 4,
+                subject: "FastVisa Support",
+                name: "",
+                message: "Hey there. Welcome to your inbox.",
+                isRead: true,
+              })
+            }
+          >
+            <SupportContact
+              name={"FastVisa Support"}
+              message={"Hey there! Welcome to your inbox."}
+              date={"01/16/2021 12:19"}
+              isRead={true}
+            />
+          </div>
         </div>
       )}
       {/* Content End */}
