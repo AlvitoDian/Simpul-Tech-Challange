@@ -9,14 +9,18 @@ import { useTask } from "@/contexts/TaskContext";
 export default function Task({ id, title, date, description, isDone }) {
   const { tasks, setTasks, addNewTask, deleteTask } = useTask();
 
+  const ref = useRef(null);
+
   const textareaRef = useRef(null);
   const inputRef = useRef(null);
 
   const [startDate, setStartDate] = useState(date);
   const [isChecked, setIsChecked] = useState(isDone);
+  const [tagList, setTagList] = useState([]);
   const [isCloseDetailTask, setIsCloseDetailTask] = useState(false);
 
   const [isFocusedDate, setIsFocusedDate] = useState(false);
+  const [isFocusedTag, setIsFocusedTag] = useState(false);
 
   const [newTitle, setNewTitle] = useState(title);
   const [isInputTitle, setIsInputTitle] = useState(false);
@@ -27,6 +31,17 @@ export default function Task({ id, title, date, description, isDone }) {
   const [isInputText, setIsInputText] = useState(false);
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const categories = [
+    { id: 1, name: "Important ASAP", color: "#E5F1FF" },
+    { id: 2, name: "Offline Meeting", color: "#FDCFA4" },
+    { id: 3, name: "Virtual Meeting", color: "#F9E9C3" },
+    { id: 4, name: "ASAP", color: "#AFEBDB" },
+    { id: 5, name: "Client Related", color: "#CBF1C2" },
+    { id: 6, name: "Self Task", color: "#CFCEF9" },
+    { id: 7, name: "Appointments", color: "#F9E0FD" },
+    { id: 8, name: "Court Related", color: "#9DD0ED" },
+  ];
 
   const handleDeleteOpen = () => {
     setIsDeleteOpen(!isDeleteOpen);
@@ -87,14 +102,22 @@ export default function Task({ id, title, date, description, isDone }) {
     setIsFocusedDate(false);
   };
 
-  function resizeTextarea() {
+  const handleFocusTag = () => {
+    setIsFocusedTag(true);
+  };
+
+  const handleBlurTag = () => {
+    setIsFocusedTag(false);
+  };
+
+  /* function resizeTextarea() {
     const textarea = textareaRef.current;
     const charCount = text.length;
     const extraHeight = Math.floor(charCount / 70) * 20 + 20;
     textarea.style.height = `${extraHeight + textarea.scrollHeight}px`;
   }
 
-  /*   useEffect(() => {
+  useEffect(() => {
     resizeTextarea();
   }, []); */
 
@@ -129,6 +152,29 @@ export default function Task({ id, title, date, description, isDone }) {
     console.log("delte", id);
     await deleteTask(id);
   };
+
+  const handleCategoryAdd = (category) => {
+    setTagList((prevTagList) => {
+      if (prevTagList.some((tag) => tag.id === category.id)) {
+        return prevTagList;
+      }
+      return [...prevTagList, category];
+    });
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsFocusedTag(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   return (
     <div
@@ -246,14 +292,16 @@ export default function Task({ id, title, date, description, isDone }) {
         </div>
 
         <div
-          className={`wrapper flex-col pl-[40.5px] ${
+          className={`wrapper flex-col pl-[30.5px] ${
             isCloseDetailTask ? "" : "is-open"
           }`}
         >
           <div
-            className={`${isFocusedDate ? "inner-visibel" : "inner-hidden"}`}
+            className={`inner-visible ${
+              isFocusedDate || isFocusedTag ? "inner-visible" : "inner-hidden"
+            }`}
           >
-            <div className="flex items-center">
+            <div className="pl-[10px] flex items-center">
               <div>
                 <svg
                   width="16.67"
@@ -303,7 +351,7 @@ export default function Task({ id, title, date, description, isDone }) {
               </div>
             </div>
 
-            <div className="flex items-center pt-[13px]">
+            <div className="pl-[10px] flex items-center pt-[13px]">
               <div>
                 <svg
                   width="15"
@@ -367,6 +415,62 @@ export default function Task({ id, title, date, description, isDone }) {
                     )}
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div
+              className="pl-[10px] flex items-center mt-[13px] bg-[#F9F9F9] py-[6px] rounded-[5px] cursor-pointer relative"
+              onClick={handleFocusTag}
+            >
+              <div
+                ref={ref}
+                className={`${
+                  !isFocusedTag ? "hidden" : ""
+                } absolute top-[50px] bg-white w-[277px] h-auto z-[999] border-[1px] border-[#828282] rounded-[5px] flex-col`}
+              >
+                {categories.map((category) => (
+                  <div
+                    key={category.id}
+                    className="rounded-[5px] flex mx-[15px] my-[12px] pl-[14px] py-[6px]"
+                    style={{ backgroundColor: category.color }}
+                    onClick={() => handleCategoryAdd(category)}
+                  >
+                    <span className="font-bold text-[#4F4F4F] text-[12px]">
+                      {category.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center py-[5px]">
+                <svg
+                  width="15"
+                  height="20"
+                  viewBox="0 0 15 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M13.4033 0.833374H5.5234C4.65748 0.833374 3.95687 1.58337 3.95687 2.50004H11.8289C12.6948 2.50004 13.4033 3.25004 13.4033 4.16671V15L14.9777 15.8334V2.50004C14.9777 1.58337 14.2692 0.833374 13.4033 0.833374ZM10.2546 5.83337V16.6417L6.94044 15.1334L6.31855 14.85L5.69667 15.1334L2.38255 16.6417V5.83337H10.2546ZM2.38251 4.16671H10.2545C11.1204 4.16671 11.8289 4.91671 11.8289 5.83337V19.1667L6.31851 16.6667L0.808105 19.1667V5.83337C0.808105 4.91671 1.51659 4.16671 2.38251 4.16671Z"
+                    fill={`${tagList.length > 0 ? "#2F80ED" : "#828282"}`}
+                  />
+                </svg>
+              </div>
+
+              <div className="flex flex-wrap gap-[9px] ml-[20px] my-[3px]">
+                {tagList.map((tag) => (
+                  <div
+                    className="rounded-[5px] py-[2px] px-[12px]"
+                    key={tag.id}
+                    style={{ backgroundColor: tag.color }}
+                  >
+                    <span className="font-bold text-[14px] text-[#4F4F4F]">
+                      {tag.name}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

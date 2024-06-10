@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BubbleChat from "./BubbleChat";
 import ChatDivider from "./ChatDivider";
 import { useInbox } from "@/contexts/InboxContext";
 
 export default function SupportChatSection() {
-  const { setChatSection, setExitChat } = useInbox();
+  const {
+    setChatSection,
+    setExitChat,
+    isReplying,
+    replyMessage,
+    setIsReplying,
+    setReplyMessage,
+  } = useInbox();
 
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([
@@ -17,13 +24,18 @@ export default function SupportChatSection() {
       date: "19.32",
       isSender: false,
       userColor: ["#2F80ED", "#F8F8F8"],
+      isReply: false,
+      replyMessage: "",
     },
     {
       name: "",
-      message: "Hi, I need help with something can you help me ?",
+      message:
+        "Hi, I need help with something can you help me d help with something can you help me ?",
       date: "19.32",
       isSender: true,
       userColor: ["#9B51E0", "#EEDCFF"],
+      isReply: false,
+      replyMessage: "",
     },
   ]);
 
@@ -36,6 +48,27 @@ export default function SupportChatSection() {
   };
 
   const addChat = () => {
+    if (isReplying) {
+      const newChat = {
+        id: messages.length + 1,
+        type: "bubble",
+        name: "Your Name",
+        message: newMessage,
+        date: getCurrentTime(),
+        isSender: true,
+        userColor: ["#9B51E0", "#EEDCFF"],
+        isReply: true,
+        replyMessage: replyMessage,
+      };
+
+      setMessages([...messages, newChat]);
+      setNewMessage("");
+
+      setIsReplying(false);
+
+      return;
+    }
+
     const newChat = {
       id: messages.length + 1,
       type: "bubble",
@@ -44,6 +77,8 @@ export default function SupportChatSection() {
       date: getCurrentTime(),
       isSender: true,
       userColor: ["#9B51E0", "#EEDCFF"],
+      isReply: false,
+      replyMessage: "",
     };
 
     setMessages([...messages, newChat]);
@@ -55,6 +90,14 @@ export default function SupportChatSection() {
     const hours = String(now.getHours()).padStart(2, "0");
     const minutes = String(now.getMinutes()).padStart(2, "0");
     return `${hours}.${minutes}`;
+  };
+
+  const cancelReply = () => {
+    setIsReplying(false);
+    setReplyMessage({
+      username: null,
+      message: null,
+    });
   };
 
   return (
@@ -115,18 +158,53 @@ export default function SupportChatSection() {
               date={message.date}
               isSender={message.isSender}
               userColor={message.userColor}
+              isReply={message.isReply}
+              reply={message.replyMessage}
             />
           ))}
         </div>
       </div>
 
       <div className="flex px-[20px] gap-[13px] pt-[10px]">
-        <div>
+        <div className="relative">
+          <div
+            className={`${
+              !isReplying ? "hidden" : ""
+            } absolute bg-[#F2F2F2] bottom-[39px] z-[20] w-full rounded-t-[5px] p-[15px] border-[1px] border-[#828282]`}
+          >
+            <div
+              className="absolute right-[20px] top-[15px] cursor-pointer"
+              onClick={cancelReply}
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 1.20857L10.7914 0L6 4.79143L1.20857 0L0 1.20857L4.79143 6L0 10.7914L1.20857 12L6 7.20857L10.7914 12L12 10.7914L7.20857 6L12 1.20857Z"
+                  fill="#4F4F4F"
+                />
+              </svg>
+            </div>
+            <div className="flex flex-col max-w-[495.6px]">
+              <span className="font-bold text-[16px] text-[#4F4F4F]">
+                {replyMessage.username}
+              </span>
+              <span className="font-regular text-[16px] text-[#4F4F4F]">
+                {replyMessage.message}
+              </span>
+            </div>
+          </div>
           <input
             type="text"
             placeholder="Type a new message"
-            className="font-regular border-[1px] border-[#828282] rounded-[5px] w-[580px] h-[40px] 
-            placeholder-[#333333] pl-[16px]"
+            className={`font-regular border-[1px] border-[#828282] ${
+              isReplying ? "rounded-b-[5px]" : "rounded-[5px]"
+            } w-[580px] h-[40px] 
+            placeholder-[#333333] pl-[16px]`}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
           />
