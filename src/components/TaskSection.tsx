@@ -18,8 +18,6 @@ export default function TaskSection() {
     setIsMyTasksOpen(!isMyTasksOpen);
   };
 
-  console.log(tasks, "section");
-
   return (
     <div className="flex-col">
       <div className="flex justify-between pl-[114px] pr-[23px] pt-[18px] mb-[22px]">
@@ -71,10 +69,12 @@ export default function TaskSection() {
         <LoadingTasks />
       ) : (
         <div
-          className="flex-col custom-scrollbar overflow-auto h-[629px] mr-[13px]"
+          className={`flex-col custom-scrollbar overflow-auto ${
+            window.innerWidth < 1400 ? "h-[429px]" : "h-[629px]"
+          } mr-[13px]`}
           id="style-3"
         >
-          {tasks.map((task, index) => (
+          {tasks.map((task) => (
             <Task
               key={task.id}
               id={task.id}

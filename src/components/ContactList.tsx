@@ -94,7 +94,12 @@ export default function ContactList() {
       {showContent ? (
         <LoadingChats />
       ) : (
-        <div className="flex-col">
+        <div
+          className={`flex-col overflow-auto custom-scrollbar ${
+            window.innerWidth < 1400 ? "h-[429px]" : "h-[629]"
+          } mt-[5px] mr-[13px]`}
+          id="style-3"
+        >
           {filteredContacts.map((contact, index) => (
             <div key={index} onClick={() => openChat(contact)}>
               <Contact

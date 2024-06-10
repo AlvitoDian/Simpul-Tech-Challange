@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BubbleChat from "./BubbleChat";
 import ChatDivider from "./ChatDivider";
 import { useInbox } from "@/contexts/InboxContext";
@@ -5,15 +6,8 @@ import { useInbox } from "@/contexts/InboxContext";
 export default function SupportChatSection() {
   const { setChatSection, setExitChat } = useInbox();
 
-  const closeChat = () => {
-    setChatSection(false);
-  };
-
-  const exitChat = () => {
-    setExitChat(true);
-  };
-
-  const messages = [
+  const [newMessage, setNewMessage] = useState("");
+  const [messages, setMessages] = useState([
     {
       name: "FastVisa Support",
       message:
@@ -29,7 +23,37 @@ export default function SupportChatSection() {
       isSender: true,
       userColor: ["#9B51E0", "#EEDCFF"],
     },
-  ];
+  ]);
+
+  const closeChat = () => {
+    setChatSection(false);
+  };
+
+  const exitChat = () => {
+    setExitChat(true);
+  };
+
+  const addChat = () => {
+    const newChat = {
+      id: messages.length + 1,
+      type: "bubble",
+      name: "Your Name",
+      message: newMessage,
+      date: getCurrentTime(),
+      isSender: true,
+      userColor: ["#9B51E0", "#EEDCFF"],
+    };
+
+    setMessages([...messages, newChat]);
+    setNewMessage("");
+  };
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    return `${hours}.${minutes}`;
+  };
 
   return (
     <div className="flex-col relative">
@@ -73,7 +97,9 @@ export default function SupportChatSection() {
       </div>
 
       <div
-        className="flex-col my-[13.5px] ml-[20px] mr-[11px] custom-scrollbar overflow-auto h-[554px]"
+        className={`flex-col my-[13.5px] ml-[20px] mr-[11px] custom-scrollbar overflow-auto ${
+          window.innerWidth < 1400 ? "h-[354px]" : "h-[554px]"
+        }`}
         id="style-3"
       >
         <div className="pr-[18px]">
@@ -96,11 +122,16 @@ export default function SupportChatSection() {
             type="text"
             placeholder="Type a new message"
             className="font-regular border-[1px] border-[#828282] rounded-[5px] w-[580px] h-[40px] 
-            placeholder-[#333333] pl-[16px] "
+            placeholder-[#333333] pl-[16px]"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
           />
         </div>
 
-        <button className="flex items-center justify-center bg-[#2F80ED] w-full rounded-[5px] font-bold text-white">
+        <button
+          className="flex items-center justify-center bg-[#2F80ED] w-full rounded-[5px] font-bold text-white"
+          onClick={addChat}
+        >
           Send
         </button>
       </div>

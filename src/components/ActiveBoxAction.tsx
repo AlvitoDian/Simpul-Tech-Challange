@@ -27,16 +27,16 @@ export default function ActiveBoxAction({ isChat, isTask }) {
   return (
     <>
       <div
-        className={`${
-          isChat ? "" : "hidden"
-        } absolute w-[734px] h-[737px] bg-[#FFFFFF] right-[34px] bottom-[110px] border-[1px] border-[#828282] rounded-[5px]`}
+        className={`${isChat ? "" : "hidden"} absolute w-[734px] ${
+          window.innerWidth < 1400 ? "h-[537px]" : "h-[737px]"
+        } bg-[#FFFFFF] right-[34px] bottom-[110px] border-[1px] border-[#828282] rounded-[5px]`}
       >
         {chatSection ? renderChatContent() : <ContactList />}
       </div>
       <div
-        className={`${
-          isTask ? "" : "hidden"
-        } absolute w-[734px] h-[737px] bg-[#FFFFFF] right-[34px] bottom-[110px] border-[1px] border-[#828282] rounded-[5px]`}
+        className={`${isTask ? "" : "hidden"} absolute w-[734px] ${
+          window.innerWidth < 1400 ? "h-[537px]" : "h-[737px]"
+        } bg-[#FFFFFF] right-[34px] bottom-[110px] border-[1px] border-[#828282] rounded-[5px]`}
       >
         <TaskSection />
       </div>
