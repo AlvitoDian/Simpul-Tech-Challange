@@ -70,7 +70,9 @@ export default function TaskSection() {
       ) : (
         <div
           className={`flex-col custom-scrollbar overflow-auto ${
-            window.innerWidth < 1600 ? "h-[429px]" : "h-[629px]"
+            typeof window !== "undefined" && window.innerWidth < 1600
+              ? "h-[429px]"
+              : "h-[629px]"
           } mr-[13px]`}
           id="style-3"
         >

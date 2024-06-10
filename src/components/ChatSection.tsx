@@ -151,7 +151,9 @@ export default function ChatSection() {
 
       <div
         className={`flex-col my-[13.5px] ml-[20px] mr-[11px] custom-scrollbar overflow-auto ${
-          window.innerWidth < 1600 ? "h-[354px]" : "h-[554px]"
+          typeof window !== "undefined" && window.innerWidth < 1600
+            ? "h-[354px]"
+            : "h-[554px]"
         }`}
         id="style-3"
       >
