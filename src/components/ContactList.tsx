@@ -96,7 +96,7 @@ export default function ContactList() {
       ) : (
         <div
           className={`flex-col overflow-auto custom-scrollbar ${
-            window.innerWidth < 1400 ? "h-[429px]" : "h-[629]"
+            window.innerWidth < 1600 ? "h-[429px]" : "h-[629]"
           } mt-[5px] mr-[13px]`}
           id="style-3"
         >

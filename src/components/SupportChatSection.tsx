@@ -98,7 +98,7 @@ export default function SupportChatSection() {
 
       <div
         className={`flex-col my-[13.5px] ml-[20px] mr-[11px] custom-scrollbar overflow-auto ${
-          window.innerWidth < 1400 ? "h-[354px]" : "h-[554px]"
+          window.innerWidth < 1600 ? "h-[354px]" : "h-[554px]"
         }`}
         id="style-3"
       >
