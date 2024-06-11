@@ -297,7 +297,7 @@ export default function Task({ id, title, date, description, isDone }) {
           }`}
         >
           <div
-            className={`inner-visible ${
+            className={`${
               isFocusedDate || isFocusedTag ? "inner-visible" : "inner-hidden"
             }`}
           >
